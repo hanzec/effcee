@@ -30,13 +30,27 @@ if(EFFCEE_BUILD_TESTING)
     endif()
   endif()
   if (NOT TARGET gmock)
-    message(FATAL_ERROR "gmock was not found - required for tests")
+    message(STATUS "Fetching googletest ...")
+    include(FetchContent)
+    FetchContent_Declare(
+            googletest
+            GIT_TAG release-1.11.0
+            GIT_REPOSITORY https://github.com/google/googletest.git)
+    FetchContent_MakeAvailable(googletest)
   endif()
 endif()
 
 if (NOT TARGET re2)
   if (IS_DIRECTORY ${EFFCEE_RE2_DIR})
     add_subdirectory(${EFFCEE_RE2_DIR} re2 EXCLUDE_FROM_ALL)
+  else()
+    message(STATUS "Fetching re2 ...")
+    include(FetchContent)
+    FetchContent_Declare(
+            re2
+            GIT_TAG 2021-11-01
+            GIT_REPOSITORY https://github.com/google/re2.git)
+    FetchContent_MakeAvailable(re2)
   endif()
 endif()
 if (NOT TARGET re2)
