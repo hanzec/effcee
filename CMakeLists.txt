@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
 project(effcee C CXX)
-enable_testing()
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -15,6 +14,7 @@ if(${EFFCEE_BUILD_TESTING})
     add_definitions(-DGTEST_HAS_COMBINE=1)
   endif(MSVC)
 else()
+  enable_testing()
   message(STATUS "Configuring Effcee to avoid building tests.")
 endif()
 
