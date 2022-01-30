@@ -44,16 +44,9 @@ if (NOT TARGET re2)
   if (IS_DIRECTORY ${EFFCEE_RE2_DIR})
     add_subdirectory(${EFFCEE_RE2_DIR} re2 EXCLUDE_FROM_ALL)
   else()
-    message(STATUS "Fetching re2 ...")
-    set(RE2_BUILD_TESTING  OFF CACHE INTERNAL "Turn of generat re2 tests target")
-    include(FetchContent)
-    FetchContent_Declare(
-            re2
-            GIT_TAG 2021-11-01
-            GIT_REPOSITORY https://github.com/google/re2.git)
-    FetchContent_MakeAvailable(re2)
+    find_package(re2 REQUIRED)
   endif()
 endif()
-if (NOT TARGET re2)
+if (NOT TARGET re2 AND NOT re2_FOUND)
   message(FATAL_ERROR "re2 was not found - required for compilation")
 endif()
