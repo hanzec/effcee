@@ -45,6 +45,7 @@ if (NOT TARGET re2)
     add_subdirectory(${EFFCEE_RE2_DIR} re2 EXCLUDE_FROM_ALL)
   else()
     message(STATUS "Fetching re2 ...")
+    set(RE2_BUILD_TESTING  OFF CACHE INTERNAL "Turn of generat re2 tests target")
     include(FetchContent)
     FetchContent_Declare(
             re2
